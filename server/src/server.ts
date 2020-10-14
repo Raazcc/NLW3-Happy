@@ -1,14 +1,14 @@
 import express from 'express'
 import './database/connection'
-const app = express()
+import routes from './routes'
+
 const port = 3333
+const app = express()
 
 app.use(express.json())
+app.use(routes)
 
 app.listen(port, () => {
     console.log("server running on port: " + port)
 })
 
-app.get('/user', (req, res) => {
-    return res.json({ message: "Hello HAPPY" })
-})
