@@ -7,7 +7,9 @@ export default {
     //Lista todos orfanatos
     async index(req: Request, res: Response) {
         const orphanagesRepository = getRepository(Orphanage)
-        const orphanages = await orphanagesRepository.find()
+        const orphanages = await orphanagesRepository.find({
+            relations: ['images']
+        })
         return res.json(orphanages)
     },
 
@@ -15,7 +17,9 @@ export default {
     async show(req: Request, res: Response) {
         const { id } = req.params
         const orphanagesRepository = getRepository(Orphanage)
-        const orphanage = await orphanagesRepository.findOneOrFail(id)
+        const orphanage = await orphanagesRepository.findOneOrFail(id, {
+            relations: ['images']
+        })
         return res.json(orphanage)
     },
 
